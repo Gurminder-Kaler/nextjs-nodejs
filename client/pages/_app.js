@@ -1,12 +1,10 @@
 import "../styles/globals.css";
-import Layout from "@/components/Layout";
-import 'bootstrap/dist/css/bootstrap.css';
+// import 'bootstrap/dist/css/bootstrap.css';
+import 'bulma/css/bulma.min.css';
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Layout>
       <Component {...pageProps} />
-    </Layout>
   );
 }
 

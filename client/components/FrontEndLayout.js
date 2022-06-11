@@ -1,16 +1,18 @@
 import Nav from "@/components/Nav";
 import Head from 'next/head'
+import Footer from "./Footer";
 
-const Layout = ({children}) => {
+const FrontEndLayout = ({children}) => {
     return (
         <>
             <Head>
                 <title>ABC</title>
             </Head>
             <Nav/>
-            {children} 
+            {children}
+            <Footer/>
         </>
     )
 }
-
-export default Layout;
+        
+export default FrontEndLayout;

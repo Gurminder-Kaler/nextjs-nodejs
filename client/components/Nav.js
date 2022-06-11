@@ -3,49 +3,73 @@ import Link from "next/link";
 const Nav = () => {
   return (
     <>
-      <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Navbar
-          </a>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link href="/" >
-                  <a className="nav-link active" aria-current="page">
-                    Home
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/about">
-                  <a className="nav-link" aria-current="page">
-                    About
-                  </a>
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link href="/contact">
-                  <a className="nav-link" aria-current="page">
-                    Contact
-                  </a>
-                </Link>
-              </li>
-            </ul>
+      <section className="hero is-medium is-bold">
+        <div className="hero-head">
+          <nav className="navbar">
+            <div className="container">
+              <div className="navbar-brand">
+                <a className="navbar-item" href="../">
+                  <img
+                    src="http://bulma.io/images/bulma-type-white.png"
+                    alt="Logo"
+                  />
+                </a>
+                <span className="navbar-burger burger" data-target="navbarMenu">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+              </div>
+              <div id="navbarMenu" className="navbar-menu">
+                <div className="navbar-end">
+                  <div className="tabs is-right">
+                    <ul>
+                      <li className="is-active">
+                        <Link href="/">Home</Link>
+                      </li>
+                      <li>
+                        <Link href="/about">About</Link>
+                      </li>
+                      <li>  
+                        <Link href="/contact">Contact</Link>
+                      </li>
+                      {/* <li>
+                        <Link href="/help">Help</Link>
+                      </li> */}
+                    </ul>
+                    <span className="navbar-item">
+                      <a
+                        className="button is-outlined"
+                        href="/logout"
+                      >
+                        <span className="icon">
+                          <i className="fas fa-power-off"></i>
+                        </span>
+                        <span title="Logout">
+                          Logout
+                        </span>
+                      </a>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </nav>
+        </div>
+        <div className="hero-body">
+          <div className="container has-text-centered">
+            <h1 className="title">
+              The new standard in &lt;insert industry here&gt;
+            </h1>
+            <h2 className="subtitle">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+              enim ad minim veniam, quis nostrud exercitation ullamco laboris
+              nisi ut aliquip ex ea commodo consequat.
+            </h2>
           </div>
         </div>
-      </nav>
+      </section>
     </>
   );
 };
