@@ -4,9 +4,8 @@ const app = express();
 const todoRouter = require("./routes/todoRouter");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
-const bodyParser = require("body-parser");
-
-const uri = "mongodb+srv://iptvapplication280:IPTV.APPLICATION@cluster0.v93hg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const bodyParser = require("body-parser"); 
+const uri = `mongodb+srv://civil:civil0892@cluster0.k6hf6.mongodb.net/?retryWrites=true&w=majority`;
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
