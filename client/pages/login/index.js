@@ -3,6 +3,8 @@ import { useState } from "react";
 import Link from "next/link";
 import { signIn, signOut } from "next-auth/react";
 
+import { loginAction } from "@/actions/authAction";
+
 const contact = () => {
   const formState = {
     email: "",
@@ -11,7 +13,8 @@ const contact = () => {
   const [form, setForm] = useState(formState);
 
   const onSubmit = () => {
-    console.log("data", JSON.stringify(form));
+    console.log("sending data from login page : ", JSON.stringify(form));
+    loginAction(form);
   };
 
   const handlePasswordChange = (e) => {
@@ -24,7 +27,7 @@ const contact = () => {
 
   return (
     <FrontEndLayout>
-      <div className="container my-5 mt-5 mx-5 px-5">
+      <div className="container-fluid my-5 mt-5 mx-5 px-5">
         <div className="columns">
           <div className="column is-4 is-offset-4">
             <Link href="/api/auth/signin">
@@ -106,7 +109,7 @@ const contact = () => {
                 <div className="column is-12">
                   <button
                     type="button"
-                    onClick={() => onSubmit()}
+                    onClick={onSubmit}
                     className="button is-success is-pulled-left is-size-6"
                   >
                     Login

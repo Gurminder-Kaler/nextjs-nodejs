@@ -1,14 +1,18 @@
 import Link from "next/link";
 
 import { useRouter } from "next/router";
-import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 
 const Nav = () => {
   const { asPath } = useRouter();
-  const { data: session, status } = useSession();
-
+  const session = useSession();
+  console.log('session', session);
+  const status = "unauthenticated";
+  const logoutHandler = () => {
+    removeCookies("token");
+    router.push("/login");
+  };
   const Logo = (props) => {
     return (
       <h2>
@@ -22,8 +26,8 @@ const Nav = () => {
     );
   };
 
-  console.log("session", session);
-  console.log("loading", status);
+  // console.log("session", session);
+  // console.log("loading", status);
 
   return (
     <section className="hero is-medium is-bold">
@@ -90,20 +94,22 @@ const Nav = () => {
                   {status == "authenticated" ? (
                     <>
                       <span className="navbar-item">
-                        <a
-                          className="button is-outlined is-danger"
-                          href="/profile"
-                        >
-                          <span className="icon">
-                            <i className="fa fa-user"></i>
-                          </span>
-                          <span title="Profile">{session ? session.user.name : ''}</span>
-                        </a>
+                        <Link href="/profile">
+                          <a className="button is-outlined is-danger">
+                            <span className="icon">
+                              <i className="fa fa-user"></i>
+                            </span>
+                            <span title="Profile">
+                              {/* {session ? session.user.name : ""} */}
+                              aman
+                            </span>
+                          </a>
+                        </Link>
                       </span>
                       <span className="navbar-item">
                         <a
                           className="button is-outlined is-danger"
-                          href="/logout"
+                          onClick={logoutHandler}
                         >
                           <span className="icon">
                             <i className="fa fa-power-off"></i>

@@ -2,7 +2,7 @@ import FrontEndLayout from "@/components/FrontEndLayout";
 import { useState } from "react";
 import Link from "next/link";
 
-const contact = () => {
+const register = () => {
   const formState = {
     firstName: "",
     lastName: "",
@@ -10,7 +10,7 @@ const contact = () => {
     password: "",
     confirmPassword: "",
   };
-
+  
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
 
@@ -50,7 +50,7 @@ const contact = () => {
 
   return (
     <FrontEndLayout>
-      <div className="container my-5 mt-5 mx-5 px-5">
+      <div className="container-fluid my-5 mt-5 mx-5 px-5">
         <div className="columns">
           <div className="column is-4 is-offset-4 box">
             <h2 className="title is-2 is-capitalized">Register</h2>
@@ -222,4 +222,4 @@ const contact = () => {
   );
 };
 
-export default contact;
+export default register;

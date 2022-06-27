@@ -3,12 +3,16 @@
 // import styles from "@/styles/Home.module.css";
 
 import HomePageBanner from "@/components/HomePageBanner";
-import FrontEndLayout from  "@/components/FrontEndLayout";
+import FrontEndLayout from "@/components/FrontEndLayout";
+import  AuthContext from "@/context/authContext";
+import { useContext } from "react";
 
 export default function Home() {
+  // const context = useContext(AuthContext);
+  // console.log('context', context);
   return (
-    <FrontEndLayout>  
-      <HomePageBanner/>
+    <FrontEndLayout>
+      <HomePageBanner />
       <section className="container">
         <div className="columns features">
           <div className="column is-4">
@@ -76,7 +80,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>   
-  </FrontEndLayout>
+      </section>
+    </FrontEndLayout>
   );
 }

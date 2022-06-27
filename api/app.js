@@ -1,7 +1,10 @@
 require("module-alias/register");
+require('dotenv').config()
 const express = require("express");
 const app = express();
-const todoRouter = require("./routes/todoRouter");
+const todoRouter = require("@routes/todoRouter");
+const authRouter = require("@routes/authRouter");
+const newsletterRouter = require("@routes/newsletterRouter");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 const bodyParser = require("body-parser"); 
@@ -20,7 +23,7 @@ app.use(bodyParser.json());
 // app.use('cors');
 db.on("error", console.error.bind(console, "Connection error:"));
 db.once("open", function callback() {
-  console.log("Database Connected! API URL : 80");
+  console.log("Database Connected! API URL : "+process.env.API_URL);
 });
 
 mongoose.promise = global.Promise;
@@ -39,6 +42,9 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/todo", todoRouter);
+app.use("/api/auth", authRouter);
+app.use("/api/newsletter", newsletterRouter);
+
 // console.log('app ', app.route);
 app.use((req, res, next) => {
   const error = new Error("URL Not found or Please Check POST or GET");

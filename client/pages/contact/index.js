@@ -1,7 +1,6 @@
 import FrontEndLayout from "@/components/FrontEndLayout";
 import { useState } from "react";
 
-
 const contact = () => {
   const formState = {
     name: "",
@@ -10,7 +9,6 @@ const contact = () => {
     message: "",
   };
   const [form, setForm] = useState(formState);
-  
 
   const onSubmit = () => {
     console.log("data", JSON.stringify(form));
@@ -34,7 +32,7 @@ const contact = () => {
 
   return (
     <FrontEndLayout>
-      <div className="container my-5 mt-5 mx-5 px-5">
+      <div className="container-fluid my-5 mt-5 mx-5 px-5">
         <div className="columns">
           <div className="column is-6">
             <h2 className="title is-2 is-capitalized">Contact Us</h2>
@@ -85,7 +83,6 @@ const contact = () => {
                   className="label is-size-4 has-text-weight-light"
                 ></label>
                 <div className="control has-icons-left">
-                  
                   <input
                     type="text"
                     name="subject"
@@ -127,7 +124,7 @@ const contact = () => {
           <div className="column is-6">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2885.148320545008!2d-79.76146598450119!3d43.68667977912011!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x882b1596f9574643%3A0xad7612fc9befe7ad!2sAlgoma%20University!5e0!3m2!1sen!2sca!4v1654985456152!5m2!1sen!2sca"
-              width="600"
+              width="100%"
               height="450"
               allowFullScreen=""
               loading="lazy"
