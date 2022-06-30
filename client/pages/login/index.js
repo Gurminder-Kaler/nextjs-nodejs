@@ -1,20 +1,31 @@
 import FrontEndLayout from "@/components/FrontEndLayout";
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import Link from "next/link";
-import { signIn, signOut } from "next-auth/react";
+import { useRouter } from "next/router";
+import { loginAction } from "@/store/actions/authAction";
+import { useDispatch, useSelector } from "react-redux";
 
-import { loginAction } from "@/actions/authAction";
-
-const contact = () => {
+const login = () => {
   const formState = {
     email: "",
     password: "",
   };
   const [form, setForm] = useState(formState);
+  const { asPath, push } = useRouter();
+  const { auth } = useSelector((state) => state);
+  useEffect(() => {
+    //middleware auth
+    console.log("auth AUTH login index", auth);
+    if (auth.isAuthenticated == true) {
+      push("/");
+    }
+  }, [asPath, auth]);
 
+  const dispatch = useDispatch();
   const onSubmit = () => {
     console.log("sending data from login page : ", JSON.stringify(form));
-    loginAction(form);
+    loginAction(form, push, dispatch);
+    // signIn(JSON.stringify(form));
   };
 
   const handlePasswordChange = (e) => {
@@ -30,7 +41,7 @@ const contact = () => {
       <div className="container-fluid my-5 mt-5 mx-5 px-5">
         <div className="columns">
           <div className="column is-4 is-offset-4">
-            <Link href="/api/auth/signin">
+            {/* <Link href="/api/auth/signin">
               <a
                 className="btn btn-outline-dark box"
                 onClick={(e) => {
@@ -50,10 +61,24 @@ const contact = () => {
                   <div className="column is-10">Login with Google</div>
                 </div>
               </a>
-            </Link>
+            </Link> */}
             <hr />
+            {/* <div className="column is-4 is-offset-3">
+              <button
+                type="button"
+                onClick={onSubmit}
+                className="button is-success is-size-6"
+              >
+                Login with Credentials
+              </button>
+            </div> */}
+            {/* <div className="column is-4 is-offset-3">
+              <Link href="/register">
+                <a className="button is-dark is-size-6">New? Register Now!</a>
+              </Link>
+            </div> */}
 
-            <form method="post" className="box">
+            <form className="box">
               <h2 className="title is-2 is-capitalized">Login</h2>
               <div className="field">
                 <label
@@ -129,4 +154,4 @@ const contact = () => {
   );
 };
 
-export default contact;
+export default login;

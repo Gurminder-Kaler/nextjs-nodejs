@@ -1,18 +1,13 @@
 import Link from "next/link";
-
 import { useRouter } from "next/router";
-import { useSession } from "next-auth/react";
 import Image from "next/image";
-
+import { logoutAction } from "@/store/actions/authAction";
+import { useSelector, useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 const Nav = () => {
-  const { asPath } = useRouter();
-  const session = useSession();
-  console.log('session', session);
-  const status = "unauthenticated";
-  const logoutHandler = () => {
-    removeCookies("token");
-    router.push("/login");
-  };
+  const dispatch = useDispatch();
+  const { asPath, push } = useRouter();
+
   const Logo = (props) => {
     return (
       <h2>
@@ -26,8 +21,32 @@ const Nav = () => {
     );
   };
 
-  // console.log("session", session);
-  // console.log("loading", status);
+  const onLogout = () => {
+    // console.log('ONLOGOUT push dispatch', push, dispatch);
+    logoutAction(push, dispatch);
+  };
+  const { auth } = useSelector((state) => state);
+  console.log("AUTH AUTH NAV JS", auth);
+  const [authStatus, setAuthStatus] = useState(
+    auth.isAuthenticated ? "authenticated" : "unauthenticated"
+  );
+  const [authToken, setAuthToken] = useState(null);
+  useEffect(() => {
+    const jwtToken = localStorage.getItem("jwtToken");
+    setAuthToken(jwtToken);
+  }, [auth]);
+
+  useEffect(() => {
+    if (authToken) {
+      if (authStatus == "unauthenticated") {
+        setAuthStatus("authenticated");
+      }
+    } else {
+      if (authStatus == "authenticated") {
+        setAuthStatus("unauthenticated");
+      }
+    }
+  }, [asPath, authToken, auth]);
 
   return (
     <section className="hero is-medium is-bold">
@@ -68,7 +87,7 @@ const Nav = () => {
                         <a>Contact</a>
                       </Link>
                     </li>
-                    {status == "unauthenticated" ? (
+                    {authStatus == "unauthenticated" ? (
                       <>
                         <li className={asPath == "/login" ? "is-active" : ""}>
                           <Link href="/login">
@@ -91,7 +110,7 @@ const Nav = () => {
                         <Link className={asPath == "/" ? "is-active" : ""} href="/help">Help</Link>
                       </li> */}
                   </ul>
-                  {status == "authenticated" ? (
+                  {authStatus == "authenticated" ? (
                     <>
                       <span className="navbar-item">
                         <Link href="/profile">
@@ -107,15 +126,16 @@ const Nav = () => {
                         </Link>
                       </span>
                       <span className="navbar-item">
-                        <a
+                        <button
                           className="button is-outlined is-danger"
-                          onClick={logoutHandler}
+                          type="button"
+                          onClick={onLogout}
                         >
                           <span className="icon">
                             <i className="fa fa-power-off"></i>
                           </span>
                           <span title="Logout">Logout</span>
-                        </a>
+                        </button>
                       </span>
                     </>
                   ) : (

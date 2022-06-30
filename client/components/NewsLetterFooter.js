@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { subscribeToNewsletterAction } from "@/actions/newsletterAction";
+import { subscribeToNewsletterAction } from "@/store/actions/newsletterAction";
 
 function NewsLetterFooter() {
   const initialState = {

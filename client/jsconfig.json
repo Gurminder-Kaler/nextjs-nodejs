@@ -6,7 +6,11 @@
             "@/styles/*" : ["styles/*"],
             "@/public/*" : ["public/*"],
             "@/context/*" : ["context/*"],
-            "@/actions/*" : ["actions/*"]
+            "@/actions/*" : ["actions/*"],
+            "@/utils/*" : ["utils/*"],
+            "@/store/*" : ["store/*"],
+            "@/constant/*" : ["constant/*"],
+            "@/validations/*" : ["validations/*"]
         }
     }
 } 
