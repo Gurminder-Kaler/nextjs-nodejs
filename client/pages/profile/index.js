@@ -1,5 +1,5 @@
 import React from 'react'
-import FrontEndLayout from '@/components/FrontEndLayout'
+import FrontEndLayout from '@/components/frontend/FrontEndLayout'
 
 function profile() {
     return (

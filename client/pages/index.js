@@ -2,8 +2,8 @@
 // import Image from "next/image";
 // import styles from "@/styles/Home.module.css";
 
-import HomePageBanner from "@/components/HomePageBanner";
-import FrontEndLayout from "@/components/FrontEndLayout";
+import HomePageBanner from "@/components/frontend/HomePageBanner";
+import FrontEndLayout from "@/components/frontend/FrontEndLayout";
 // import  AuthContext from "@/context/authContext";
 // import { useContext } from "react";
 

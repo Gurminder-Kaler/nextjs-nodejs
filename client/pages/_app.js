@@ -2,15 +2,23 @@ import "@/styles/globals.css";
 // import 'bootstrap/dist/css/bootstrap.css';
 import "bulma/css/bulma.min.css";
 import "font-awesome/css/font-awesome.css";
+import PersistWrapper from "next-persist/lib/NextPersistWrapper";
 import { Wrapper, Store } from "@/store/store";
 import { Provider } from "react-redux";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import setAuthToken from "@/utils/setAuthToken";
-import jwt_decode from 'jwt-decode';
-import { setCurrentUser } from '@/store/actions/authAction';
-//Pertains the user
+import jwt_decode from "jwt-decode";
+import { setCurrentUser } from "@/store/actions/authAction";
+//Pertains the state
+const npConfig = {
+  method: "localStorage",
+  allowList: {
+    auth: ["isAuthenticated", "user", "role"],
+    user: ["users", "user", "loading"],
+  },
+};
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
   useEffect(() => {
@@ -32,10 +40,12 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
     }
   }, []);
   return (
-    <Provider store={Store}>
-      <ToastContainer />
-      <Component {...pageProps} />
-    </Provider>
+    <PersistWrapper wrapperConfig={npConfig}>
+      <Provider store={Store}>
+        <ToastContainer />
+        <Component {...pageProps} />
+      </Provider>
+    </PersistWrapper>
   );
 }
 export default Wrapper.withRedux(App);

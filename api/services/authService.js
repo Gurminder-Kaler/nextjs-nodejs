@@ -114,8 +114,11 @@ const loginServiceFunc = async (req, res) => {
         if (result) {
           const token = jwt.sign(
             {
-              email: user.email,
               userId: user._id,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              role: user.role,
             },
             process.env.JWT_KEY,
             {

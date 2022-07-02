@@ -1,4 +1,4 @@
-import FrontEndLayout from "@/components/FrontEndLayout";
+import FrontEndLayout from "@/components/frontend/FrontEndLayout";
 import { useState } from "react";
 
 const contact = () => {

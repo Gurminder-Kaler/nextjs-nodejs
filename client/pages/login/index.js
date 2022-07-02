@@ -1,5 +1,5 @@
-import FrontEndLayout from "@/components/FrontEndLayout";
-import { useState, useEffect, useContext } from "react";
+import FrontEndLayout from "@/components/frontend/FrontEndLayout";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { loginAction } from "@/store/actions/authAction";

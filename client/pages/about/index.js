@@ -1,5 +1,5 @@
 import aboutCss from "@/styles/about.module.css";
-import FrontEndLayout from "@/components/FrontEndLayout";
+import FrontEndLayout from "@/components/frontend/FrontEndLayout";
 function about() {
   return (
     <FrontEndLayout>
