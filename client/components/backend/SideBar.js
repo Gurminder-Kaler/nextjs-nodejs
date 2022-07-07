@@ -1,23 +1,24 @@
-import React from "react";
+import Link from "next/link";
 
 export const SideBar = () => {
   return (
-    <aside className="menu">
-      <p className="menu-label">General</p>
+    <aside className="menu" style={{borderRight:"1px solid #f2466742"}}>
+      <p className="menu-label">&nbsp;<i className="fa fa-info-circle"></i>&nbsp;General</p>
       <ul className="menu-list">
         <li>
-          <a>Dashboard</a>
-        </li>
-        <li>
-          <a>Customers</a>
+          <Link href="/admin">
+            <a>&nbsp;<i className="fa fa-dashboard"></i>&nbsp;Dashboard</a>
+          </Link>
         </li>
       </ul>
-      <p className="menu-label">Administration</p>
+      <p className="menu-label">&nbsp;<i className="fa fa-users"></i>&nbsp;Manage Users</p>
       <ul className="menu-list">
         <li>
-          <a>Team Settings</a>
+          <Link href="/admin/user">
+            <a>&nbsp;<i className="fa fa-user"></i>&nbsp;Users' List</a>
+          </Link>
         </li>
-        <li>
+        {/* <li>
           <a className="is-active">Manage Your Team</a>
           <ul>
             <li>
@@ -30,27 +31,27 @@ export const SideBar = () => {
               <a>Add a member</a>
             </li>
           </ul>
-        </li>
-        <li>
-          <a>Invitations</a>
-        </li>
-        <li>
-          <a>Cloud Storage Environment Settings</a>
-        </li>
-        <li>
-          <a>Authentication</a>
-        </li>
+        </li> */}
       </ul>
-      <p className="menu-label">Transactions</p>
+      <p className="menu-label">&nbsp;<i className="fa fa-cube"></i>&nbsp;Product</p>
       <ul className="menu-list">
         <li>
-          <a>Payments</a>
+          <Link href="/admin/product">
+            <a>&nbsp;<i className="fa fa-cube"></i>&nbsp;Products' List</a>
+          </Link>
         </li>
         <li>
-          <a>Transfers</a>
+          <Link href="/admin/product/create">
+            <a>&nbsp;<i className="fa fa-cube"></i>&nbsp;Create Product</a>
+          </Link>
         </li>
+      </ul>
+      <p className="menu-label">&nbsp;<i className="fa fa-envelope"></i>&nbsp;Newsletter Emails</p>
+      <ul className="menu-list">
         <li>
-          <a>Balance</a>
+          <Link href="/admin/newsletter">
+            <a>&nbsp;<i className="fa fa-envelope"></i>&nbsp;Email Subscriptions</a>
+          </Link>
         </li>
       </ul>
     </aside>

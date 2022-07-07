@@ -12,13 +12,19 @@ module.exports = Object.freeze({
       UNSUBSCRIBED: "Un-subscribed to newsletter " + S,
       FETCHED: "Newsletter Emails fetched " + S,
     },
+    USER: { 
+      FETCHED: "User(s) fetched " + S,
+    },
     AUTH: {
-      LOGGEDIN: "User logged in " + S,
+      LOGGEDIN: "Welcome! You have logged in!",
       PASSWORD_CHANGED: "Password changed " + S,
     },
   },
   FAILURE: {
     TODO_NOT_FOUND: "TODO not found",
+    NO_USERS_FOUND: "Users not found",
+    AUTH_FAILED: "Check Email/Password",
+    NO_USER_FOUND: "User not found",
     NO_EMAILS_FOUND: "No emails found in the db.",
     ALREADY_SUBSCRIBED: "The email is already subscribed to our newsletter",
     EMAIL_NOT_SUBSCRIBED_TO_NEWSLETTER:

@@ -48,7 +48,7 @@ const contact = () => {
                     name="name"
                     id="name"
                     className="input"
-                    placeholder="Enter the name"
+                    placeholder="Please enter the name"
                     value={form.name}
                     onChange={handleNameChange}
                   />
@@ -68,7 +68,7 @@ const contact = () => {
                     name="email"
                     id="email"
                     className="input"
-                    placeholder="Enter the email"
+                    placeholder="Please enter the email"
                     value={form.email}
                     onChange={handleEmailChange}
                   />
@@ -88,7 +88,7 @@ const contact = () => {
                     name="subject"
                     id="subject"
                     className="input"
-                    placeholder="Enter the subject"
+                    placeholder="Please enter the subject"
                     value={form.subject}
                     onChange={handleSubjectChange}
                   />
@@ -107,7 +107,7 @@ const contact = () => {
                   id="message"
                   rows="5"
                   className="textarea is-medium"
-                  placeholder="Enter the message"
+                  placeholder="Please enter the message"
                   onChange={handleMessageChange}
                   value={form.message}
                 ></textarea>

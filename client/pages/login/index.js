@@ -4,27 +4,44 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { loginAction } from "@/store/actions/authAction";
 import { useDispatch, useSelector } from "react-redux";
+import { GET_ERRORS } from "@/store/types";
+import { loginValidator } from "@/validations/loginValidator";
+import isEmpty from "@/validations/is-empty";
 
 const login = () => {
   const formState = {
     email: "",
     password: "",
   };
-  const [form, setForm] = useState(formState);
+
+  const { auth, error } = useSelector((state) => state);
   const { asPath, push } = useRouter();
-  const { auth } = useSelector((state) => state);
+  const dispatch = useDispatch();
+
   useEffect(() => {
     //middleware auth
     console.log("auth AUTH login index", auth);
     if (auth.isAuthenticated == true) {
       push("/");
     }
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
   }, [asPath, auth]);
 
-  const dispatch = useDispatch();
+  const [passwordShown, setPasswordShown] = useState(false);
+
+  const togglePassword = () => {
+    setPasswordShown(!passwordShown);
+  };
+
+  const [form, setForm] = useState(formState);
+
   const onSubmit = () => {
     console.log("sending data from login page : ", JSON.stringify(form));
-    loginAction(form, push, dispatch);
+    loginValidator(form, dispatch);
+    if (isEmpty(error)) loginAction(form, push, dispatch);
     // signIn(JSON.stringify(form));
   };
 
@@ -61,8 +78,8 @@ const login = () => {
                   <div className="column is-10">Login with Google</div>
                 </div>
               </a>
-            </Link> */}
-            <hr />
+            </Link> 
+            <hr />*/}
             {/* <div className="column is-4 is-offset-3">
               <button
                 type="button"
@@ -92,7 +109,9 @@ const login = () => {
                         type="email"
                         name="email"
                         id="email"
-                        className="input"
+                        className={
+                          error && error.email ? "is-danger input" : "input"
+                        }
                         placeholder="Email"
                         value={form.email}
                         onChange={handleEmailChange}
@@ -100,6 +119,11 @@ const login = () => {
                       <span className="icon is-left">
                         <i className="fa fa-envelope"></i>
                       </span>
+                      {error ? (
+                        <span className="has-text-danger">{error.email}</span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>
@@ -109,25 +133,49 @@ const login = () => {
                   htmlFor="password"
                   className="label is-size-4 has-text-weight-light"
                 ></label>
-
                 <div className="columns">
-                  <div className="column is-12">
+                  <div className="column is-10">
                     <div className="control has-icons-left">
                       <input
-                        type="password"
+                        type={passwordShown ? "text" : "password"}
                         name="password"
                         id="password"
-                        className="input"
-                        placeholder="password"
+                        className={
+                          error && error.password ? "is-danger input" : "input"
+                        }
+                        placeholder="Enter password"
                         value={form.password}
                         onChange={handlePasswordChange}
                       />
                       <span className="icon is-left">
-                        <i className="fa fa-eye"></i>
+                        <i
+                          className={
+                            passwordShown ? "fa fa-eye-slash" : "fa fa-eye"
+                          }
+                        ></i>
                       </span>
                     </div>
                   </div>
+                  <div className="column is-1">
+                    <button
+                      type="button"
+                      className="mt-1 button is-dark is-size-7"
+                      id="showPassword"
+                      onClick={togglePassword}
+                    >
+                      <i
+                        className={
+                          passwordShown ? "fa fa-eye-slash" : "fa fa-eye"
+                        }
+                      ></i>
+                    </button>
+                  </div>
                 </div>
+                {error ? (
+                  <span className="has-text-danger">{error.password}</span>
+                ) : (
+                  ""
+                )}
               </div>
 
               <div className="columns">

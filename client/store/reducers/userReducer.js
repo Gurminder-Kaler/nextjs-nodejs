@@ -4,15 +4,18 @@ import {
   GET_USER_VIA_ID,
   UPDATE_USER,
 } from "../types";
+
 import { getLocalStore } from "next-persist";
+
 const initialState = {
-  users: null,
-  user: null,
+  users: [],
+  user: {},
   loading: false,
 };
 const persistedState = getLocalStore('userReducer', initialState);
 // eslint-disable-next-line import/no-anonymous-default-export
 export default function (state = persistedState, action) {
+  
   switch (action.type) {
     case USER_LOADING:
       return {
@@ -22,7 +25,7 @@ export default function (state = persistedState, action) {
     case GET_ALL_USERS:
       return {
         ...state,
-        users: action.payload.data.users,
+        users: action.payload,
         loading: false,
       };
     case GET_USER_VIA_ID:

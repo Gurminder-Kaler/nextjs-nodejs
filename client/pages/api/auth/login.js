@@ -7,7 +7,7 @@ export default async function (req, res) {
       console.log("SUPER RESULT", result.data);
       return res.json({
         status: result.data.status,
-        token: result.data.token,
+        token: result.data.token, 
         user: result.data.data,
         success: result.data.success,
         message: result.data.message,

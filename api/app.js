@@ -5,6 +5,7 @@ const app = express();
 const todoRouter = require("@routes/todoRouter");
 const authRouter = require("@routes/authRouter");
 const newsletterRouter = require("@routes/newsletterRouter");
+const userRouter = require("@routes/userRouter");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 const bodyParser = require("body-parser"); 
@@ -44,6 +45,7 @@ app.use((req, res, next) => {
 app.use("/api/todo", todoRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/newsletter", newsletterRouter);
+app.use("/api/user", userRouter);
 
 // console.log('app ', app.route);
 app.use((req, res, next) => {

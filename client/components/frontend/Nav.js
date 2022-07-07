@@ -16,7 +16,6 @@ export const Nav = () => {
   const dispatch = useDispatch();
   const { asPath, push } = useRouter();
   const onLogout = () => {
-    // console.log('ONLOGOUT push dispatch', push, dispatch);
     logoutAction(push, dispatch);
   };
   const { auth } = useSelector((state) => state);
@@ -44,7 +43,7 @@ export const Nav = () => {
   }, [asPath, authToken, auth]);
 
   return (
-    <section className="hero is-medium is-bold">
+    <section className="hero is-medium is-bold ddark">
       <div className="hero-head">
         <nav className="navbar">
           <div className="container">
@@ -84,31 +83,42 @@ export const Nav = () => {
                     </li>
                     <li className={asPath == "/" ? "is-active" : ""}>
                       <Link href="/">
-                        <a>Home</a>
+                        <a>
+                          &nbsp;<i className="fa fa-home"></i>&nbsp;Home
+                        </a>
                       </Link>
                     </li>
                     <li className={asPath == "/about" ? "is-active" : ""}>
                       <Link href="/about">
-                        <a>About</a>
+                        <a>
+                          &nbsp;<i className="fa fa-info-circle"></i>&nbsp;About
+                        </a>
                       </Link>
                     </li>
                     <li className={asPath == "/contact" ? "is-active" : ""}>
                       <Link href="/contact">
-                        <a>Contact</a>
+                        <a>
+                          &nbsp;<i className="fa fa-phone"></i>&nbsp;Contact
+                        </a>
                       </Link>
                     </li>
                     {authStatus == "unauthenticated" ? (
                       <>
                         <li className={asPath == "/login" ? "is-active" : ""}>
                           <Link href="/login">
-                            <a>Login</a>
+                            <a>
+                              &nbsp;<i className="fa fa-sign-in"></i>&nbsp;Login
+                            </a>
                           </Link>
                         </li>
                         <li
                           className={asPath == "/register" ? "is-active" : ""}
                         >
                           <Link href="/register">
-                            <a>Register</a>
+                            <a>
+                              &nbsp;<i className="fa fa-user-plus"></i>
+                              &nbsp;Register
+                            </a>
                           </Link>
                         </li>
                       </>

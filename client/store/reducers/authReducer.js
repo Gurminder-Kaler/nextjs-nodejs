@@ -7,9 +7,13 @@ const initialState = {
   role: "",
 };
 
+import { getLocalStore } from "next-persist";
+
+const persistedState = getLocalStore("authReducer", initialState);
+
 // eslint-disable-next-line import/no-anonymous-default-export
-export default function (state = initialState, action) {
-  console.log('action payload auth reducer', action.payload);
+export default function (state = persistedState, action) {
+  
   switch (action.type) {
     case SET_CURRENT_USER:
       return {

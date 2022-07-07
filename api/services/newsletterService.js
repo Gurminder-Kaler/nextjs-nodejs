@@ -2,11 +2,13 @@ const mongoose = require("mongoose");
 const messages = require("@constants/messages");
 const Newsletter = require("@models/newsletterModel");
 
+const newsletterValidator = require("@validations/newsletterValidator/newsletterValidator");
+
 //getAllNewsletterEmails
 const getAllNewsletterEmails = async (req, res) => {
   console.log("req", req.body);
   Newsletter.find().then((outerResult) => {
-    console.log('outerResult', outerResult);
+    console.log("outerResult", outerResult);
     if (outerResult) {
       return res.json({
         status: 200,
@@ -27,6 +29,14 @@ const getAllNewsletterEmails = async (req, res) => {
 //subscribeToNewsletter
 const subscribeToNewsletter = async (req, res) => {
   console.log("req node jssss", req.body);
+  const { errors, isValid } = newsletterValidator(req.body);
+  if (!isValid) {
+    return res.json({
+      status: 400,
+      success: false,
+      message: errors,
+    });
+  }
   Newsletter.findOne({ newsletterEmail: req.body.newsletterEmail }).then(
     (outerResult) => {
       if (!outerResult) {

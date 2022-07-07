@@ -1,6 +1,12 @@
 import FrontEndLayout from "@/components/frontend/FrontEndLayout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { registerAction } from "@/store/actions/authAction";
+import { useDispatch, useSelector } from "react-redux";
+import { GET_ERRORS } from "@/store/types";
+import { registerValidator } from "@/validations/registerValidator";
+import isEmpty from "@/validations/is-empty";
 
 const register = () => {
   const formState = {
@@ -9,10 +15,29 @@ const register = () => {
     email: "",
     password: "",
     confirmPassword: "",
+    role: "CUSTOMER",
   };
-  
+
+  const { auth, error } = useSelector((state) => state);
+  console.log('UTH ERROR', error);
+  const { asPath, push } = useRouter();
+
+  useEffect(() => {
+    //middleware auth
+    console.log("auth AUTH login index", auth);
+    if (auth.isAuthenticated == true) {
+      push("/");
+    }
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
+  }, [asPath, auth]);
+
   const [passwordShown, setPasswordShown] = useState(false);
   const [confirmPasswordShown, setConfirmPasswordShown] = useState(false);
+
+  const dispatch = useDispatch();
 
   const togglePassword = () => {
     setPasswordShown(!passwordShown);
@@ -24,8 +49,11 @@ const register = () => {
 
   const [form, setForm] = useState(formState);
 
-  const onSubmit = () => {
-    console.log("data", JSON.stringify(form));
+  const onSubmit = async () => {
+    const hasError = registerValidator(form, dispatch);
+    console.log("sending data from login page : ", JSON.stringify(form));
+    console.log('errorrrrr', hasError);
+    if (!hasError) registerAction(form, push, dispatch);
   };
 
   const handleFirstNameChange = (e) => {
@@ -67,14 +95,23 @@ const register = () => {
                         type="firstName"
                         name="firstName"
                         id="firstName"
-                        className="input"
+                        className={
+                          error && error.firstName ? "is-danger input" : "input"
+                        }
                         placeholder="Enter first name"
-                        value={form.email}
+                        value={form.firstName}
                         onChange={handleFirstNameChange}
                       />
                       <span className="icon is-left">
                         <i className="fa fa-user"></i>
                       </span>
+                      {error && error.firstName ? (
+                        <span className="has-text-danger">
+                          {error.firstName}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>
@@ -91,14 +128,23 @@ const register = () => {
                         type="lastName"
                         name="lastName"
                         id="lastName"
-                        className="input"
+                        className={
+                          error && error.lastName ? "is-danger input" : "input"
+                        }
                         placeholder="Enter last name"
-                        value={form.email}
+                        value={form.lastName}
                         onChange={handleLastNameChange}
                       />
                       <span className="icon is-left">
                         <i className="fa fa-user"></i>
                       </span>
+                      {error && error.lastName ? (
+                        <span className="has-text-danger">
+                          {error.lastName}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>
@@ -115,7 +161,9 @@ const register = () => {
                         type="email"
                         name="email"
                         id="email"
-                        className="input"
+                        className={
+                          error && error.email ? "is-danger input" : "input"
+                        }
                         placeholder="Enter email"
                         value={form.email}
                         onChange={handleEmailChange}
@@ -123,6 +171,11 @@ const register = () => {
                       <span className="icon is-left">
                         <i className="fa fa-envelope"></i>
                       </span>
+                      {error && error.email ? (
+                        <span className="has-text-danger">{error.email}</span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                 </div>
@@ -137,17 +190,32 @@ const register = () => {
                   <div className="column is-10">
                     <div className="control has-icons-left">
                       <input
-                        type={ passwordShown ? "text" : "password" }
+                        type={passwordShown ? "text" : "password"}
                         name="password"
                         id="password"
-                        className="input"
+                        className={
+                          error && (error.password || error.confirmPassword)
+                            ? "is-danger input"
+                            : "input"
+                        }
                         placeholder="Enter password"
                         value={form.password}
                         onChange={handlePasswordChange}
                       />
                       <span className="icon is-left">
-                        <i className="fa fa-eye"></i>
+                        <i
+                          className={
+                            passwordShown ? "fa fa-eye-slash" : "fa fa-eye"
+                          }
+                        ></i>
                       </span>
+                      {error && error.password ? (
+                        <span className="has-text-danger">
+                          {error.password}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                   <div className="column is-1">
@@ -157,7 +225,11 @@ const register = () => {
                       id="showPassword"
                       onClick={togglePassword}
                     >
-                      <i className="fa fa-eye"></i>
+                      <i
+                        className={
+                          passwordShown ? "fa fa-eye-slash" : "fa fa-eye"
+                        }
+                      ></i>
                     </button>
                   </div>
                 </div>
@@ -172,17 +244,35 @@ const register = () => {
                   <div className="column is-10">
                     <div className="control has-icons-left">
                       <input
-                        type={ confirmPasswordShown ? "text" : "password" }
+                        type={confirmPasswordShown ? "text" : "password"}
                         name="confirmPassword"
                         id="confirmPassword"
-                        className="input"
+                        className={
+                          error && (error.password || error.confirmPassword)
+                            ? "is-danger input"
+                            : "input"
+                        }
                         placeholder="Enter the password for confirmation"
                         value={form.confirmPassword}
                         onChange={handleConfirmPasswordChange}
                       />
                       <span className="icon is-left">
-                        <i className="fa fa-eye"></i>
+                        <i
+                          className={
+                            confirmPasswordShown
+                              ? "fa fa-eye-slash"
+                              : "fa fa-eye"
+                          }
+                        ></i>
                       </span>
+
+                      {error && error.confirmPassword ? (
+                        <span className="has-text-danger">
+                          {error.confirmPassword}
+                        </span>
+                      ) : (
+                        ""
+                      )}
                     </div>
                   </div>
                   <div className="column is-1">
@@ -192,7 +282,11 @@ const register = () => {
                       id="showConfirmPassword"
                       onClick={toggleConfirmPassword}
                     >
-                      <i className="fa fa-eye"></i>
+                      <i
+                        className={
+                          confirmPasswordShown ? "fa fa-eye-slash" : "fa fa-eye"
+                        }
+                      ></i>
                     </button>
                   </div>
                 </div>

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default async function (req, res) 
+export default async function (req, res) {
   await axios
     .post(process.env.API_URL + "/newsletter/subscribeToNewsletter", req.body)
     .then((result) => {

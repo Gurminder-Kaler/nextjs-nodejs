@@ -10,17 +10,26 @@ import "react-toastify/dist/ReactToastify.css";
 import { useEffect } from "react";
 import setAuthToken from "@/utils/setAuthToken";
 import jwt_decode from "jwt-decode";
-import { setCurrentUser } from "@/store/actions/authAction";
+import { useDispatch } from "react-redux";
+
+import {
+  setCurrentUser,
+  logoutAction,
+} from "@/store/actions/authAction";
+
 //Pertains the state
 const npConfig = {
   method: "localStorage",
   allowList: {
     auth: ["isAuthenticated", "user", "role"],
     user: ["users", "user", "loading"],
+    newsletter: ["newsletterEmails"],
   },
 };
 
 function App({ Component, pageProps: { session, ...pageProps } }) {
+
+  const dispatch = useDispatch();
   useEffect(() => {
     const { location, localStorage } = window;
     if (localStorage.jwtToken) {
@@ -29,16 +38,16 @@ function App({ Component, pageProps: { session, ...pageProps } }) {
       //decode token
       const decoded = jwt_decode(localStorage.jwtToken);
       //set user and is Authenticated
-      Store.dispatch(setCurrentUser(decoded));
+      // dispatch(setCurrentUser(decoded));
       const currentTime = Date.now() / 1000;
       if (decoded.exp < currentTime) {
-        Store.dispatch(logoutUser());
-        Store.dispatch(clearCurrentProfile());
+        dispatch(logoutAction());
         //clear current Profile
         location.href = "/login";
       }
     }
   }, []);
+
   return (
     <PersistWrapper wrapperConfig={npConfig}>
       <Provider store={Store}>

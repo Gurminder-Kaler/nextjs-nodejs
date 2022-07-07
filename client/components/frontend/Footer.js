@@ -1,4 +1,5 @@
 import NewsLetterFooter from "./NewsLetterFooter";
+import Link from "next/link";
 
 export const Footer = () => {
   return (
@@ -34,27 +35,27 @@ export const Footer = () => {
             </ul>
           </div>
           <div className="column is-4">
-            <NewsLetterFooter/>
+            <NewsLetterFooter />
           </div>
           <div className="column is-4">
             <h2>
-              <strong>Category</strong>
+              <strong>Important Links</strong>
             </h2>
             <ul>
               <li>
-                <a href="#">Objects in space</a>
+                <Link href="/">
+                  <a>Home</a>
+                </Link>
               </li>
               <li>
-                <a href="#">Playing cards with coyote</a>
+                <Link href="/about">
+                  <a>About Us</a>
+                </Link>
               </li>
               <li>
-                <a href="#">Goodbye Yellow Brick Road</a>
-              </li>
-              <li>
-                <a href="#">The Garden of Forking Paths</a>
-              </li>
-              <li>
-                <a href="#">Future Shock</a>
+                <Link href="/contact">
+                  <a>Contact</a>
+                </Link>
               </li>
             </ul>
           </div>

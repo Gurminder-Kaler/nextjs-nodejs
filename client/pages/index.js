@@ -13,10 +13,10 @@ export default function Home() {
   return (
     <FrontEndLayout>
       <HomePageBanner />
-      <section className="container">
+      {/* <section className="container">
         <div className="columns features">
           <div className="column is-4">
-            <div className="card is-shady">
+            <div className="card is-dark">
               <div className="card-image has-text-centered">
                 <i className="fa fa-paw"></i>
               </div>
@@ -80,7 +80,7 @@ export default function Home() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
     </FrontEndLayout>
   );
 }

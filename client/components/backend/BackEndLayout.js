@@ -8,6 +8,9 @@ export const BackEndLayout = ({ children }) => {
         <div className="row">
           <Nav />
         </div>
+        <div className="row">
+          <hr/>
+        </div>
       </div>
       <div className="columns">
         <div className="column is-3">

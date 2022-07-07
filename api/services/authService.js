@@ -3,6 +3,8 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const messages = require("@constants/messages");
 const User = require("@models/userModel");
+const loginValidator = require("@validations/authValidator/loginValidator");
+const registerValidator = require("@validations/authValidator/registerValidator");
 // const UserMac = require("@models/userMacModel");
 // const Mac = require("@models/macModel");
 // const signUpValidator = require("@validations/authRequest/signUpValidator");
@@ -10,7 +12,14 @@ const User = require("@models/userModel");
 
 //signup
 const registerServiceFunc = async (req, res) => {
-  console.log("req", req.body);
+  const { errors, isValid } = registerValidator(req.body);
+  if (!isValid) {
+    return res.json({
+      status: 400,
+      success: false,
+      message: errors,
+    });
+  }
   User.findOne({ email: req.body.email }).then((outerResult) => {
     if (!outerResult) {
       bcrypt.hash(req.body.password, 10, (err, hash) => {
@@ -88,7 +97,15 @@ const registerServiceFunc = async (req, res) => {
 
 //login
 const loginServiceFunc = async (req, res) => {
-  console.log('login service func', req.body);
+  console.log("login service func", req.body);
+  const { errors, isValid } = loginValidator(req.body);
+  if (!isValid) {
+    return res.json({
+      status: 400,
+      success: false,
+      message: errors,
+    });
+  }
   User.findOne({
     email: req.body.email,
   })
@@ -99,7 +116,7 @@ const loginServiceFunc = async (req, res) => {
         res.json({
           status: 401,
           success: false,
-          message: messages.FAILURE.AUTH_FAILED,
+          message: { email: messages.FAILURE.NO_USER_FOUND },
         });
       }
       bcrypt.compare(req.body.password, user.password, (err, result) => {
@@ -108,7 +125,7 @@ const loginServiceFunc = async (req, res) => {
           res.json({
             status: 401,
             success: false,
-            message: messages.FAILURE.AUTH_FAILED,
+            message: { email: messages.FAILURE.NO_USER_FOUND },
           });
         }
         if (result) {
@@ -142,7 +159,7 @@ const loginServiceFunc = async (req, res) => {
           res.json({
             status: 401,
             success: false,
-            message: messages.FAILURE.AUTH_FAILED,
+            message: { email: messages.FAILURE.AUTH_FAILED },
           });
         }
       });
@@ -167,33 +184,33 @@ const getUserViaEmailServiceFunc = async (req, res) => {
   //       message: errors,
   //     });
   //   }
-    const filter = {
-      email: req.body.email,
-    };
-    User.findOne(filter)
-      .select("-deletedAt")
-      .exec()
-      .then((user) => {
-        res.json({
-          success: true,
-          // message: messages.SUCCESS.USER.FETCHED,
-          data: {
-            _id: user._id,
-            firstName: user.firstName,
-            lastName: user.lastName,
-            email: user.email,
-            createdAt: user.createdAt,
-            updatedAt: user.updatedAt,
-          },
-        });
-      })
-      .catch((err) => {
-        res.json({
-          status: 500,
-          success: false,
-          message: "err",
-        });
+  const filter = {
+    email: req.body.email,
+  };
+  User.findOne(filter)
+    .select("-deletedAt")
+    .exec()
+    .then((user) => {
+      res.json({
+        success: true,
+        // message: messages.SUCCESS.USER.FETCHED,
+        data: {
+          _id: user._id,
+          firstName: user.firstName,
+          lastName: user.lastName,
+          email: user.email,
+          createdAt: user.createdAt,
+          updatedAt: user.updatedAt,
+        },
       });
+    })
+    .catch((err) => {
+      res.json({
+        status: 500,
+        success: false,
+        message: "err",
+      });
+    });
 };
 
 //get All users
