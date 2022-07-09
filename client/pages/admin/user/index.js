@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 import { getAllUsersAction } from "@/store/actions/userAction";
+import Loader from "@/components/loader/loader";
 
 export const user = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,6 @@ export const user = () => {
   useEffect(() => {
     getAllUsersAction(dispatch);
   }, []);
-  const k  = useSelector((state)=> console.log('stated', state));
   const data = useSelector((state) => state.user.users);
 
   const [users, setUsers] = useState([]);
@@ -36,12 +36,15 @@ export const user = () => {
 
   useEffect(() => {
     setUsers(data);
-    console.log("users", users);
   }, [data]);
 
   return (
     <BackEndLayout>
-      <DataTable pagination columns={columns} data={users} selectableRows />
+      {users && users.length > 0 ? (
+        <DataTable pagination columns={columns} data={users} selectableRows />
+      ) : (
+        <Loader />
+      )}
     </BackEndLayout>
   );
 };

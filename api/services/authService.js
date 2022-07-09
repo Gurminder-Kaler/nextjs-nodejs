@@ -27,7 +27,7 @@ const registerServiceFunc = async (req, res) => {
           res.json({
             status: 500,
             success: false,
-            message: "err",
+            message: "bcrypt err",
           });
         } else {
           const user = new User({

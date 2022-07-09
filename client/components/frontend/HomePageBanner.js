@@ -1,30 +1,72 @@
-import React from "react";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+import Image from "next/image";
 
-function HomePageBanner() {
+export default function HomePageBanner() {
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
   return (
-    <>
-      <div className="hero-body">
-        <div className="container has-text-centered">
-          <h1 className="title">
-            The new standard in &lt;insert industry here&gt;
-          </h1>
-          <h2 className="subtitle">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat.
-          </h2>
-        </div>
+    <Slider {...settings}>
+      <div>
+        <Image
+          src="/cone.jpg"
+          width="100%"
+          height="30%"
+          layout="responsive"
+          objectFit="cover"
+        />
       </div>
-      <div className="box cta">
-        <p className="has-text-centered">
-          <span className="tag is-primary">New</span> Ut enim ad minim veniam,
-          quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-          commodo consequat.
-        </p>
+      <div>
+        <Image
+          src="/cone.jpg"
+          width="100%"
+          height="30%"
+          layout="responsive"
+          objectFit="cover"
+        />
       </div>
-    </>
+      <div>
+        <Image
+          src="/cone.jpg"
+          width="100%"
+          height="30%"
+          layout="responsive"
+          objectFit="cover"
+        />
+      </div>
+      <div>
+        <Image
+          src="/cone.jpg"
+          width="100%"
+          height="30%"
+          layout="responsive"
+          objectFit="cover"
+        />
+      </div>
+      <div>
+        <Image
+          src="/cone.jpg"
+          width="100%"
+          height="30%"
+          layout="responsive"
+          objectFit="cover"
+        />
+      </div>
+      <div>
+        <Image
+          src="/cone.jpg"
+          width="100%"
+          height="30%"
+          layout="responsive"
+          objectFit="cover"
+        />
+      </div>
+    </Slider>
   );
 }
-
-export default HomePageBanner;

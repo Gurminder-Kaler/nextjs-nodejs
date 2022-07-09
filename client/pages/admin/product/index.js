@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 import { getAllProductsAction } from "@/store/actions/productAction";
+import Loader from "@/components/loader/loader";
 
 export const product = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,16 @@ export const product = () => {
 
   return (
     <BackEndLayout>
-      <DataTable columns={columns} data={products} selectableRows pagination />
+      {products && products.length > 0 ? (
+        <DataTable
+          columns={columns}
+          data={products}
+          selectableRows
+          pagination
+        />  
+      ) : (
+        <Loader />
+      )}
     </BackEndLayout>
   );
 };

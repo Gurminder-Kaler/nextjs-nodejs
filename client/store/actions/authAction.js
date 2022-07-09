@@ -19,19 +19,8 @@ export const loginAction = async (data, push, dispatch) => {
         localStorage.setItem("jwtToken", token);
         localStorage.setItem("role", role);
         setAuthToken(token);
-        // const decoded = jwt_decode(token);
-
         dispatch(setCurrentRole(role));
         dispatch(setCurrentUser(user));
-        // toast(res.data.message, {
-        //   position: "top-left",
-        //   autoClose: 5000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        // });
         push("/");
       } else {
         dispatch({
@@ -68,19 +57,8 @@ export const registerAction = async (data, push, dispatch) => {
         localStorage.setItem("jwtToken", token);
         localStorage.setItem("role", role);
         setAuthToken(token);
-        // const decoded = jwt_decode(token);
-
         dispatch(setCurrentRole(role));
         dispatch(setCurrentUser(user));
-        // toast(res.data.message, {
-        //   position: "top-left",
-        //   autoClose: 5000,
-        //   hideProgressBar: false,
-        //   closeOnClick: true,
-        //   pauseOnHover: true,
-        //   draggable: true,
-        //   progress: undefined,
-        // });
         push("/");
       } else {
         dispatch({

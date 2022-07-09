@@ -1,15 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { subscribeToNewsletterAction } from "@/store/actions/newsletterAction";
 import { useSelector, useDispatch } from "react-redux";
+import { useRouter } from "next/router";
+import { GET_ERRORS } from "@/store/types";
 
 export const NewsLetterFooter = () => {
   const initialState = {
     newsletterEmail: "",
   };
   const [newsletterForm, setNewsletterForm] = useState(initialState);
-  const { error } = useSelector((state) => state);
-
+  const { auth, error } = useSelector((state) => state);
+  const { asPath } = useRouter();
   const dispatch = useDispatch();
+
+  // let userCaptchaValue = document.getElementById("user_captcha_input").value;
+
+  useEffect(() => {
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
+  }, [asPath, auth]);
   const submitForm = () => {
     console.log(" Submit Form ", newsletterForm);
     subscribeToNewsletterAction(newsletterForm, dispatch);

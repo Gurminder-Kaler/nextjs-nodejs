@@ -32,7 +32,7 @@ export const SideBar = () => {
             </li>
           </ul>
         </li> */}
-      </ul>
+      </ul> 
       <p className="menu-label">&nbsp;<i className="fa fa-cube"></i>&nbsp;Product</p>
       <ul className="menu-list">
         <li>
@@ -46,11 +46,16 @@ export const SideBar = () => {
           </Link>
         </li>
       </ul>
-      <p className="menu-label">&nbsp;<i className="fa fa-envelope"></i>&nbsp;Newsletter Emails</p>
+      <p className="menu-label">&nbsp;<i className="fa fa-envelope"></i>&nbsp;Submissions & Subscriptions</p>
       <ul className="menu-list">
         <li>
           <Link href="/admin/newsletter">
-            <a>&nbsp;<i className="fa fa-envelope"></i>&nbsp;Email Subscriptions</a>
+            <a>&nbsp;<i className="fa fa-envelope"></i>&nbsp;Newsletter Subscriptions</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/admin/contactForm">
+            <a>&nbsp;<i className="fa fa-envelope"></i>&nbsp;Contact Form Submissions</a>
           </Link>
         </li>
       </ul>

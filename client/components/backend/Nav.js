@@ -44,6 +44,11 @@ export const Nav = () => {
             <div className="navbar-item">
               <div className="buttons">
                 <button
+                  className="button is-success"
+                  type="button" 
+                >&nbsp;<i className="fa fa-user"></i>&nbsp;Welcome, Admin
+                  </button>
+                <button
                   className="button is-danger"
                   type="button"
                   onClick={onLogout}

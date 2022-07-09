@@ -6,7 +6,6 @@ import { loginAction } from "@/store/actions/authAction";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_ERRORS } from "@/store/types";
 import { loginValidator } from "@/validations/loginValidator";
-import isEmpty from "@/validations/is-empty";
 
 const login = () => {
   const formState = {
@@ -20,7 +19,6 @@ const login = () => {
 
   useEffect(() => {
     //middleware auth
-    console.log("auth AUTH login index", auth);
     if (auth.isAuthenticated == true) {
       push("/");
     }
@@ -40,8 +38,8 @@ const login = () => {
 
   const onSubmit = () => {
     console.log("sending data from login page : ", JSON.stringify(form));
-    loginValidator(form, dispatch);
-    if (isEmpty(error)) loginAction(form, push, dispatch);
+    const hasError = loginValidator(form, dispatch);
+    if (!hasError) loginAction(form, push, dispatch);
     // signIn(JSON.stringify(form));
   };
 

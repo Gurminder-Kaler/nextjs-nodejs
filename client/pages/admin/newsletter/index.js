@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import DataTable from "react-data-table-component";
 import { getAllNewsletterEmailsAction } from "@/store/actions/newsletterAction";
+import Loader from "@/components/loader/loader";
 
 export const newsletter = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,16 @@ export const newsletter = () => {
 
   return (
     <BackEndLayout>
-      <DataTable columns={columns} data={newsletterEmails} selectableRows pagination />
+      {newsletterEmails && newsletterEmails.length > 0 ? (
+        <DataTable
+          columns={columns}
+          data={newsletterEmails}
+          selectableRows
+          pagination
+        />
+      ) : (
+        <Loader />
+      )}
     </BackEndLayout>
   );
 };

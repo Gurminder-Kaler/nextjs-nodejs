@@ -1,5 +1,16 @@
 import FrontEndLayout from "@/components/frontend/FrontEndLayout";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useRouter } from "next/router";
+import { GET_ERRORS } from "@/store/types";
+import { contactFormSubmitAction } from "@/store/actions/generalAction";
+import { contactFormValidator } from "@/validations/contactFormValidator";
+// import {
+//   loadCaptchaEnginge,
+//   LoadCanvasTemplate,
+//   LoadCanvasTemplateNoReload,
+//   validateCaptcha,
+// } from "react-simple-captcha";
 
 const contact = () => {
   const formState = {
@@ -8,10 +19,32 @@ const contact = () => {
     subject: "",
     message: "",
   };
+
+  const { auth, error } = useSelector((state) => state);
+  const { asPath } = useRouter();
+  const dispatch = useDispatch();
+
+  // let userCaptchaValue = document.getElementById("user_captcha_input").value;
+
+  useEffect(() => {
+    dispatch({
+      type: GET_ERRORS,
+      payload: {},
+    });
+  }, [asPath, auth]);
+
   const [form, setForm] = useState(formState);
 
   const onSubmit = () => {
     console.log("data", JSON.stringify(form));
+    const hasError = contactFormValidator(form, dispatch);
+
+    // if (validateCaptcha(userCaptchaValue) == true) {
+      if (!hasError) {
+        contactFormSubmitAction(form, dispatch);
+        setForm(formState);
+      }
+    // }
   };
 
   const handleNameChange = (e) => {
@@ -47,7 +80,9 @@ const contact = () => {
                     type="text"
                     name="name"
                     id="name"
-                    className="input"
+                    className={
+                      error && error.name ? "is-danger input" : "input"
+                    }
                     placeholder="Please enter the name"
                     value={form.name}
                     onChange={handleNameChange}
@@ -55,6 +90,11 @@ const contact = () => {
                   <span className="icon is-left">
                     <i className="fa fa-user"></i>
                   </span>
+                  {error && error.name ? (
+                    <span className="has-text-danger">{error.name}</span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div className="field">
@@ -67,7 +107,9 @@ const contact = () => {
                     type="email"
                     name="email"
                     id="email"
-                    className="input"
+                    className={
+                      error && error.email ? "is-danger input" : "input"
+                    }
                     placeholder="Please enter the email"
                     value={form.email}
                     onChange={handleEmailChange}
@@ -75,6 +117,11 @@ const contact = () => {
                   <span className="icon is-left">
                     <i className="fa fa-envelope"></i>
                   </span>
+                  {error && error.email ? (
+                    <span className="has-text-danger">{error.email}</span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div className="field">
@@ -87,7 +134,9 @@ const contact = () => {
                     type="text"
                     name="subject"
                     id="subject"
-                    className="input"
+                    className={
+                      error && error.subject ? "is-danger input" : "input"
+                    }
                     placeholder="Please enter the subject"
                     value={form.subject}
                     onChange={handleSubjectChange}
@@ -95,6 +144,11 @@ const contact = () => {
                   <span className="icon is-left">
                     <i className="fa fa-question"></i>
                   </span>
+                  {error && error.subject ? (
+                    <span className="has-text-danger">{error.subject}</span>
+                  ) : (
+                    ""
+                  )}
                 </div>
               </div>
               <div className="field">
@@ -106,12 +160,25 @@ const contact = () => {
                   name="message"
                   id="message"
                   rows="5"
-                  className="textarea is-medium"
+                  className={
+                    error && error.message
+                      ? "is-danger textarea is-medium"
+                      : "textarea is-medium"
+                  }
                   placeholder="Please enter the message"
                   onChange={handleMessageChange}
                   value={form.message}
                 ></textarea>
+                {error && error.message ? (
+                  <span className="has-text-danger">{error.message}</span>
+                ) : (
+                  ""
+                )}
               </div>
+              <div>
+                {/* <LoadCanvasTemplate /> */}
+              </div>
+
               <button
                 type="button"
                 onClick={onSubmit}

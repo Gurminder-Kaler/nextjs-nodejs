@@ -18,8 +18,7 @@ export const Nav = () => {
   const onLogout = () => {
     logoutAction(push, dispatch);
   };
-  const { auth } = useSelector((state) => state);
-  console.log("AUTH AUTH NAV JS", auth);
+  const { auth } = useSelector((state) => state); 
   const [authStatus, setAuthStatus] = useState(
     auth.isAuthenticated ? "authenticated" : "unauthenticated"
   );

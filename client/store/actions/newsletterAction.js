@@ -52,16 +52,7 @@ export const getAllNewsletterEmailsAction = (dispatch) => {
               ? res.data.message
               : "Something Went Wrong",
         });
-      }
-      // toast(result.data.message, {
-      //   position: "top-left",
-      //   autoClose: 5000,
-      //   hideProgressBar: false,
-      //   closeOnClick: true,
-      //   pauseOnHover: true,
-      //   draggable: true,
-      //   progress: undefined,
-      // });
+      } 
     })
     .catch((err) => {
       toast(err, {

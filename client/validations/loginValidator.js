@@ -8,7 +8,7 @@ export const loginValidator = (data, dispatch) => {
 
   if (isEmpty(data.email)) {
 
-    msg.email = "Email 1s is required";
+    msg.email = "Email is required";
     error = true;
 
   } else if (isEmpty(data.password)) {
@@ -27,6 +27,7 @@ export const loginValidator = (data, dispatch) => {
       payload: msg,
     });
   }
+  return error;
 };
 
 // export const error;
