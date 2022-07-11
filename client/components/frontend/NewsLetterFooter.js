@@ -60,7 +60,7 @@ export const NewsLetterFooter = () => {
           <div className="row is-12 my-2">
             <div className="control">
               <div className="block">
-                <a className="button is-size-7 is-link" onClick={submitForm}>
+                <a className="button is-size-6 is-link" onClick={submitForm}>
                   <i className="fa fa-paper-plane"></i>&nbsp;Subscribe
                 </a>
               </div>

@@ -182,7 +182,7 @@ const contact = () => {
               <button
                 type="button"
                 onClick={onSubmit}
-                className="button is-success is-size-5"
+                className="button is-success is-size-6"
               >
                 Submit
               </button>

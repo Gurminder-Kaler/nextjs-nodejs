@@ -18,7 +18,7 @@ const register = () => {
   };
 
   const { auth, error } = useSelector((state) => state);
-  console.log('UTH ERROR', error);
+  console.log("UTH ERROR", error);
   const { asPath, push } = useRouter();
 
   useEffect(() => {
@@ -49,9 +49,7 @@ const register = () => {
   const [form, setForm] = useState(formState);
 
   const onSubmit = async () => {
-    const hasError = registerValidator(form, dispatch);
-    console.log("sending data from login page : ", JSON.stringify(form));
-    console.log('errorrrrr', hasError);
+    const hasError = registerValidator(form, dispatch); 
     if (!hasError) registerAction(form, push, dispatch);
   };
 
@@ -298,11 +296,12 @@ const register = () => {
                     onClick={() => onSubmit()}
                     className="button is-success is-size-6 is-pulled-left"
                   >
-                    Register
+                    <i className="fa fa-user-plus"></i>&nbsp;Register
                   </button>
                   <Link href="/login">
                     <a className="button is-dark is-size-6 is-pulled-right">
-                      Already a member? Login Now!
+                      <i className="fa fa-sign-in"></i>&nbsp;Already a member?
+                      Login Now!
                     </a>
                   </Link>
                 </div>

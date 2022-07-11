@@ -1,19 +1,46 @@
-var fields = [];
-let p = { name: "file", maxCount: 1 };
-fields.push(p);
-var storage = multer.diskStorage({
+const app = require("express");
+const router = app.Router();
+const multer = require("multer");
+const productController = require("@controllers/productController");
+
+var fieldsArray = [];
+
+const imgField = { name: "img", maxCount: 1 };
+
+fieldsArray.push(imgField);
+
+multer.diskStorage({
   destination: function (req, file, cb) {
     // files is the Upload_folder_name
-    cb(null, "files");
+    cb(null, "product/img");
   },
   filename: function (req, file, cb) {
     cb(null, file.fieldname + "-" + Date.now() + ".m3u");
   },
 });
 
-var upload = multer({ dest: "files" })
-// If you do not want to use diskStorage then uncomment it
+var upload = multer({ dest: "product/img" });
 
-// Define the maximum size for uploading
-// picture i.e. 1 MB. it is optional
-const maxSize = 1 * 1000 * 1000;
+router.post(
+  "/saveProduct",
+  upload.fields(fieldsArray),
+  productController.saveProduct
+);
+
+router.post(
+  "/deleteProduct",
+  productController.deleteProduct
+);
+
+router.post(
+  "/updateProduct",
+  upload.fields(fieldsArray),
+  productController.updateProduct
+);
+
+router.post(
+  "/getProductViaId",
+  productController.getProductViaId
+);
+
+module.exports = router;

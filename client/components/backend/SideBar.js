@@ -33,16 +33,26 @@ export const SideBar = () => {
           </ul>
         </li> */}
       </ul> 
-      <p className="menu-label">&nbsp;<i className="fa fa-cube"></i>&nbsp;Product</p>
+      <p className="menu-label">&nbsp;<i className="fa fa-cube"></i>&nbsp;Product & Category</p>
       <ul className="menu-list">
         <li>
           <Link href="/admin/product">
-            <a>&nbsp;<i className="fa fa-cube"></i>&nbsp;Products' List</a>
+            <a>&nbsp;<i className="fa fa-list-alt"></i>&nbsp;Products' List</a>
           </Link>
         </li>
         <li>
           <Link href="/admin/product/create">
             <a>&nbsp;<i className="fa fa-cube"></i>&nbsp;Create Product</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/admin/productCategory">
+            <a>&nbsp;<i className="fa fa-list-alt"></i>&nbsp;Product Categories' List</a>
+          </Link>
+        </li>
+        <li>
+          <Link href="/admin/productCategory/create">
+            <a>&nbsp;<i className="fa fa-cube"></i>&nbsp;Create Product Category</a>
           </Link>
         </li>
       </ul>

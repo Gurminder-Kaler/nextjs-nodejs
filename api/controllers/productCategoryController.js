@@ -8,7 +8,7 @@ const {
 
 exports.saveProductCategory = async (req, res) => {
   try {
-    console.log("req newsletter controller,", req.body);
+    console.log("req product category controller,", req.body);
     return await saveProductCategoryServiceFunc(req, res);
   } catch (err) {
     return res.json({
@@ -21,7 +21,7 @@ exports.saveProductCategory = async (req, res) => {
 
 exports.getProductCategoryViaId = async (req, res) => {
   try {
-    console.log("req newsletter controller,", req.body);
+    console.log("req product category controller,", req.body);
     return await getProductCategoryViaIdServiceFunc(req, res);
   } catch (err) {
     return res.json({
@@ -34,7 +34,7 @@ exports.getProductCategoryViaId = async (req, res) => {
 
 exports.updateProductCategory = async (req, res) => {
   try {
-    console.log("req newsletter controller,", req.body);
+    console.log("req product category controller,", req.body);
     return await updateProductCategoryServiceFunc(req, res);
   } catch (err) {
     return res.json({
@@ -47,7 +47,7 @@ exports.updateProductCategory = async (req, res) => {
 
 exports.getAllProductCategories = async (req, res) => {
   try {
-    console.log("req newsletter controller,", req.body);
+    console.log("req product category controller,", req.body);
     return await getAllProductCategoriesServiceFunc(req, res);
   } catch (err) {
     return res.json({
@@ -60,7 +60,7 @@ exports.getAllProductCategories = async (req, res) => {
 
 exports.deleteProductCategory = async (req, res) => {
   try {
-    console.log("req newsletter controller,", req.body);
+    console.log("req product category controller,", req.body);
     return await deleteProductCategoryServiceFunc(req, res);
   } catch (err) {
     return res.json({

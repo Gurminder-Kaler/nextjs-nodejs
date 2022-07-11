@@ -5,12 +5,15 @@ const app = express();
 const todoRouter = require("@routes/todoRouter");
 const authRouter = require("@routes/authRouter");
 const newsletterRouter = require("@routes/newsletterRouter");
+const productCategoryRouter = require("@routes/productCategoryRouter");
+const productRouter = require("@routes/productRouter");
 const contactFormRouter = require("@routes/contactFormRouter");
 const userRouter = require("@routes/userRouter");
 const mongoose = require("mongoose");
 const db = mongoose.connection;
 const bodyParser = require("body-parser"); 
-const uri = `mongodb+srv://civil:civil0892@cluster0.k6hf6.mongodb.net/?retryWrites=true&w=majority`;
+const uri = process.env.MONGO_URI;
+
 mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -44,6 +47,7 @@ app.use((req, res, next) => {
 });
 
 app.use("/api/todo", todoRouter);
+app.use("/api/productCategory", productCategoryRouter);
 app.use("/api/auth", authRouter);
 app.use("/api/contact", contactFormRouter);
 app.use("/api/newsletter", newsletterRouter);

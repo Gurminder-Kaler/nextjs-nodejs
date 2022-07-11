@@ -8,7 +8,22 @@ const Shop = () => {
     <FrontEndLayout>
       <section className="section has-background-light is-clipped">
         <div className="container">
-          <h2 className="title m-16 m-24-tablet">Discover our products</h2>
+          <div className="columns has-background-white">
+            <div className="column is-4">
+              <h3 className="title pt-4 px-4 pb-4 is-relative">Discover our products</h3>
+            </div>
+            <div className="column is-5">
+              <div className="pt-4 px-4 pb-4 is-relative">
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    placeholder="Search your product here..."
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="m-20 columns is-multiline">
             <div className="column is-3-desktop is-3-tablet mb-3">
               <ShopCategorySidebar />

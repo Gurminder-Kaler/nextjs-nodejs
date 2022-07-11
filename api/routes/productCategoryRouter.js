@@ -1,39 +1,49 @@
 const app = require("express");
 const router = app.Router();
 const multer = require("multer");
+const productCategoryController = require("@controllers/productCategoryController");
 
-var fields = [];
-let p = { name: "img", maxCount: 1 };
-fields.push(p);
+var fieldsArray = [];
+
+const imgField = { name: "img", maxCount: 1 };
+const destination = "productCategory/img";
+
+fieldsArray.push(imgField);
 
 multer.diskStorage({
   destination: function (req, file, cb) {
     // files is the Upload_folder_name
-    cb(null, "productCategory/img");
+    cb(null, destination);
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now() + ".m3u");
+    cb(null, Date.now() + file.originalname);
   },
 });
 
-var upload = multer({ dest: "productCategory/img" });
-
-const productCategoryController = require("@controllers/productCategoryController");
+var upload = multer({ dest: destination });
 
 router.post(
   "/saveProductCategory",
-  upload.fields(fields),
+  upload.fields(fieldsArray),
   productCategoryController.saveProductCategory
 );
+
 router.post(
   "/deleteProductCategory",
   productCategoryController.deleteProductCategory
 );
+
 router.post(
   "/updateProductCategory",
-  upload.fields(fields),
+  upload.fields(fieldsArray),
   productCategoryController.updateProductCategory
 );
+
+router.post(
+  "/getAllProductCategories",
+  productCategoryController.getAllProductCategories
+);
+
 router.post(
   "/getProductCategoryViaId",
   productCategoryController.getProductCategoryViaId

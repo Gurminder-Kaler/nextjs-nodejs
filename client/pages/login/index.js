@@ -183,11 +183,11 @@ const login = () => {
                     onClick={onSubmit}
                     className="button is-success is-pulled-left is-size-6"
                   >
-                    Login
+                     <i className="fa fa-sign-in"></i>&nbsp;Login
                   </button>
                   <Link href="/register">
                     <a className="button is-dark is-size-6 is-pulled-right">
-                      New? Register Now!
+                      <i className="fa fa-user-plus"></i>&nbsp;New? Register Now!
                     </a>
                   </Link>
                 </div>
