@@ -7,6 +7,12 @@ module.exports = Object.freeze({
       DELETED: "TODO deleted " + S,
       FOUND: "TODO found " + S,
     },
+    PRODUCT_CATEGORY: {
+      SAVED: "Category saved " + S,
+      UPDATED: "Category updated " + S,
+      DELETED: "Category deleted " + S,
+      FOUND: "Category found " + S,
+    },
     CONTACT_FORM: {
       SUBMITTED: "We shall get back to you shortly!",
       FETCHED: "Contact form submissions fetched " + S,

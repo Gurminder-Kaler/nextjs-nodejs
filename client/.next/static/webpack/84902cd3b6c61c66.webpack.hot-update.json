@@ -1,1 +1,0 @@
-{"c":["pages/index","webpack"],"r":["pages/contact"],"m":["./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?absolutePagePath=%2FUsers%2Fgurminderkaler%2FDesktop%2Fnextjs%2Fclient%2Fpages%2Fcontact%2Findex.js&page=%2Fcontact!","./pages/contact/index.js","./store/actions/generalAction.js","./validations/contactFormValidator.js"]}

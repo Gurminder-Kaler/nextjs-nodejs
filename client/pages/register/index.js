@@ -6,7 +6,6 @@ import { registerAction } from "@/store/actions/authAction";
 import { useDispatch, useSelector } from "react-redux";
 import { GET_ERRORS } from "@/store/types";
 import { registerValidator } from "@/validations/registerValidator";
-import isEmpty from "@/validations/is-empty";
 
 const register = () => {
   const formState = {

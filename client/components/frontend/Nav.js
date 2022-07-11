@@ -94,6 +94,13 @@ export const Nav = () => {
                         </a>
                       </Link>
                     </li>
+                    <li className={asPath == "/shop" ? "is-active" : ""}>
+                      <Link href="/shop">
+                        <a>
+                          &nbsp;<i className="fa fa-shopping-cart"></i>&nbsp;Shop
+                        </a>
+                      </Link>
+                    </li>
                     <li className={asPath == "/contact" ? "is-active" : ""}>
                       <Link href="/contact">
                         <a>
